@@ -3,14 +3,13 @@
 class sequenceList
 {
 private:
-    const int  LIST_SIZE;   //链表最大值
-    const int HIGH;         //欲加入的长度
+    const int  maxCapcity;   //链表最大值
+    const int curNumberOfItem;         //欲加入的长度
     float* seq;             //建表
-    int len = HIGH;         //目前长度
+    int len = curNumberOfItem;         //目前长度
 
-    float* myList;
-    int curNumberOfItem;
-    int maxCapcity;
+    //float* myList;
+    //int curNumberOfItem;
 
 public:
     sequenceList(int, int, float[]);

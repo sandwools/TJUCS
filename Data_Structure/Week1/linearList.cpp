@@ -13,12 +13,12 @@
 
 //初始化顺序表
                            //容量         初始长度     值
-sequenceList::sequenceList(int listsize, int high, float p[]) 
-             :LIST_SIZE(listsize),  //固定了表最长长度
-              HIGH(high)//
+sequenceList::sequenceList(int listsize, int curNumberOfItem, float p[]) 
+             :maxCapcity(listsize),  //固定了表最长长度
+              curNumberOfItem(curNumberOfItem)//
              
 {
-    len = high; //目前的表长即是初始值
+    len = curNumberOfItem; //目前的表长即是初始值
     seq = new float[listsize];
 
     for (int i = 0; i < len; i++)
@@ -33,17 +33,18 @@ sequenceList::~sequenceList()
     delete[] seq;
 }
 
-//添加元素data,添加元素顺序表尾，成功返回true，失败返回false。
+//添加元素data,添加元素顺序表尾，
+//成功返回true，失败返回false。
 bool sequenceList::addItem(const float& data)
 {
-    if (HIGH >= LIST_SIZE)
+    if (curNumberOfItem >= maxCapcity)
     {
        throw -1;
        return false;//判断是否还有空位插入data。
     }
     
     else {
-        seq[HIGH] = data;//插入data。
+        seq[curNumberOfItem] = data;//插入data。
         len++;//增加顺序表长度。
         return true;
     }
@@ -51,11 +52,14 @@ bool sequenceList::addItem(const float& data)
 }
 
 
-//插入元素data,插入元素到index位置，成功返回true，失败返回false。
+//插入元素data,插入元素到index位置，
+//成功返回true，失败返回false。
 int sequenceList::insertItem(int index, const float& data)
 {
-    if (HIGH == LIST_SIZE || index < 0 || index >= LIST_SIZE) 
-       return -1;
+    if (curNumberOfItem == maxCapcity ||
+        index < 0 || 
+        index >= maxCapcity) 
+        return -1;
        //Err: 顺序表不可插入
     
     else {
@@ -64,7 +68,7 @@ int sequenceList::insertItem(int index, const float& data)
         {
             seq[i + 1] = seq[i];
         }
-        //插入点后的元素后移。
+        //插入点后的元素 从后向前 往后移。
         
         seq[index] = data;//插入data。
         len++;//增加线性表长度。
