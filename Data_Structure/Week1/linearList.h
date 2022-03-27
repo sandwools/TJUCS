@@ -1,15 +1,11 @@
-
-//完成顺序表的类。
 class sequenceList
 {
 private:
-    const int  maxCapcity;   //链表最大值
+    float* myList;             //建表
     const int curNumberOfItem;         //欲加入的长度
-    float* seq;             //建表
+    const int  maxCapcity;   //链表最大值
     int len = curNumberOfItem;         //目前长度
 
-    //float* myList;
-    //int curNumberOfItem;
 
 public:
     sequenceList(int, int, float[]);
@@ -29,6 +25,8 @@ public:
 class linkList;
 class listNode
 {
+    friend class linkList;
+    friend void merge(linkList&, linkList&);
 public:
     float data = 0.0;
     listNode* next = nullptr;
@@ -47,7 +45,7 @@ private:
     listNode* firstNode;
     listNode* curNode;
     listNode* lastNode;
-    listNode* first;
+
     listNode* getPtr(int index);
     int len;
 

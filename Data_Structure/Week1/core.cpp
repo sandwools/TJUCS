@@ -3,7 +3,7 @@
 int main()
 {
 
-//TestCore by LiuYuanchi git@github.com:sandwools:Tju_CS_Work all copy rights reserved
+//Core tested by LiuYuanchi git@github.com:sandwools:Tju_CS_Work
    
 float i[3]={ 1.3 , 4.5 , 0.4 };
 float val;
