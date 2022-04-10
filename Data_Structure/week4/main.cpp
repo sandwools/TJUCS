@@ -39,7 +39,7 @@ cout<<isFind<<endl;//7
 
 system("pause");
 
-int i[]={2,3,10,2,4,30,4,4,25};
+int i[]={2,3,10,  2,4,30,  4,4,25};
 myMatrix M(5,6,3,i);
 M.printMatrix();//5,6,3
                 //2,3,10

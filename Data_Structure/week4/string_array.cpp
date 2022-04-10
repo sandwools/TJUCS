@@ -247,16 +247,14 @@ myMatrix::myMatrix(const int& rNum, const int& cNum, const int& nNum, const int*
     matrix[0][0] = rn;
     matrix[0][1] = cn;
     matrix[0][2] = num;
-    //表头分别存储稀疏矩阵的三个信息
     int j = 1;
 
-    for(int i = 0; i < 3*num; i++)
+    for(int i = 0; i < 3*num; i=i+3)
     {
-        if((i + 1) % 3 == 1) matrix[j][0] = p[i];
-        if((i + 1) % 3 == 2) matrix[j][1] = p[i];
-        if((i + 1) % 3 == 0) matrix[j][2] = p[i];
-        //根据输入数据的规律用对三取模来将不同列数据分开
-        j = (i + 1) / 3 + 1;
+         matrix[j][0] = p[i];//r
+         matrix[j][1] = p[i+1];//c
+         matrix[j][2] = p[i+2];//value
+         j++;
     }
 }
 
@@ -271,25 +269,36 @@ myMatrix::~myMatrix()
 {
 
 }
-void myMatrix::printMatrix(){
+
+
+void myMatrix::printMatrix()
+{
     for(int i = 0; i <= num; i++)
-    for(int j = 0; j < 3; j++){
-        if(j == 2) cout << matrix[i][j] <<endl;
-        else cout<< matrix[i][j] << ",";//正常的数组输出
-    }
+       for(int j = 0; j < 3; j++)
+       {
+           if(j == 2) cout << matrix[i][j] <<endl;
+           else cout<< matrix[i][j] << ",";//正常的数组输出
+       }
 }
-void myMatrix::FastTransposeSMatrix(myMatrix& T){
-    int ans(rn);
+
+
+void myMatrix::FastTransposeSMatrix(myMatrix& T)
+{
+    int ans=rn;
     rn = cn;
     cn = ans;
-    for(int i = 0; i <= num; i++){
+    for(int i = 0; i <= num; i++)
+    {
         ans = matrix[i][0];
         matrix[i][0] = matrix[i][1];
         matrix[i][1] = ans;//转置操作
     }
+
     for(int i = 0; i <= num; i++)
-    for(int j = 0; j < 3; j++)
-    T.matrix[i][j] = matrix[i][j];
+       for(int j = 0; j < 3; j++)
+       {
+           T.matrix[i][j] = matrix[i][j];
+       }
     T.rn = rn;
     T.cn = cn;
     T.num = num;

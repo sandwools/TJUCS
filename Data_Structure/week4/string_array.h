@@ -41,14 +41,17 @@ public:
 int rn, cn, num;
 int matrix[10000][3];
 myMatrix (const int& rNum, const int& cNum, const int& nNum, const int*);
-//初始化稀疏矩阵,参数依次为行数、列数、三元组元素个数、三元组初始化数据，
-//数组元素为3的倍数，每3个数一组，分别为（row，col，value）。
+//初始化稀疏矩阵
+//参数依次为行数、列数、三元组元素个数、三元组初始化数据，
+//数组元素为3的倍数
+//每3个数一组，分别为(row，col，value)
 
 
 myMatrix();//初始化稀疏矩阵。
 ~ myMatrix();//销毁稀疏矩阵。
 
-void FastTransposeSMatrix(myMatrix& T);//实现快速转置算法。
+void FastTransposeSMatrix(myMatrix& T);
+//实现快速转置算法。
 void printMatrix();
 
 };
