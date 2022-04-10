@@ -239,6 +239,13 @@ int simpleMatch(const myStr& S, const myStr& T)
 
     return loc;
 }
+
+
+
+
+
+
+
 myMatrix::myMatrix(const int& rNum, const int& cNum, const int& nNum, const int* p)
 {
     rn=rNum;
@@ -274,33 +281,48 @@ myMatrix::~myMatrix()
 void myMatrix::printMatrix()
 {
     for(int i = 0; i <= num; i++)
-       for(int j = 0; j < 3; j++)
-       {
-           if(j == 2) cout << matrix[i][j] <<endl;
-           else cout<< matrix[i][j] << ",";//正常的数组输出
-       }
+       {cout<<matrix[i][0]<<","<<matrix[i][1]<<","<<matrix[i][2]<<endl;}
+    //    for(int j = 0; j < 3; j++)
+    //    {
+    //        if(j == 2) cout << matrix[i][j] <<endl;
+    //        else cout<< matrix[i][j] << ",";
+    //    }
 }
 
 
 void myMatrix::FastTransposeSMatrix(myMatrix& T)
 {
-    int ans=rn;
-    rn = cn;
-    cn = ans;
+    // int ans=rn;
+    // rn = cn;
+    // cn = ans;
+
+    int $rn=cn;
+    int $cn=rn;
+
+    myMatrix Mid;
+    for(int i = 0; i <= num; i++)
+       for(int j = 0; j < 3; j++)
+       {
+           Mid.matrix[i][j] = matrix[i][j];
+       }
+
     for(int i = 0; i <= num; i++)
     {
-        ans = matrix[i][0];
-        matrix[i][0] = matrix[i][1];
-        matrix[i][1] = ans;//转置操作
+        int temp;
+        temp = Mid.matrix[i][0];
+        Mid.matrix[i][0] = Mid.matrix[i][1];
+        Mid.matrix[i][1] = temp;
     }
 
     for(int i = 0; i <= num; i++)
        for(int j = 0; j < 3; j++)
        {
-           T.matrix[i][j] = matrix[i][j];
+           T.matrix[i][j] = Mid.matrix[i][j];
        }
-    T.rn = rn;
-    T.cn = cn;
+
+    Mid.~myMatrix();
+
+    T.rn = $rn;
+    T.cn = $cn;
     T.num = num;
-    //将转置后的数据存到T中
 }
