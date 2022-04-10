@@ -3,63 +3,104 @@
 using namespace std;
 myStr::myStr(const char* p)
 {
-    int ans=0;
-    int i=1;
-    while(p[ans] != '\0') ans++;
-    len = ans;//真正意义的字符串长度
-    s = new char[100000];//动态分配内存
-    s[0] = len;//第一个元素存储长度
-    for(; i < len + 2; i++) s[i] = p[i - 1];//将数组元素导入字符串
+    len=0;
+
+    while(p[len] != '\0') 
+       {len++;}
+
+    s = new char[100000];//s-> loc char
+    s[0] = len;//loc length
+
+    for(int i=1 ; i < len + 2; i++) 
+       {s[i] = p[i - 1];}
+    //mov char*p to s
 }
 
-myStr::~myStr(){
 
+myStr::~myStr()
+{
+    delete s;
 }
-void myStr::print(){
-    for(int i = 1; i < len + 1; i++) cout << s[i];//按序输出
+
+
+void myStr::print()
+{
+    for(int i = 1; i < len + 1; i++)
+    { 
+        cout << s[i];
+    }//s[0] is length
     cout << endl;
 }
-void myStr::kmp_next(){
+
+
+void myStr::kmp_next()
+{
     int i, j;
-    next = new int[len + 1];
+    next = new int[len+1];
     i = 1;
     j = 0;
+    next[0] = len;
     next[1] = 0;
-    while(i < s[0]){//判断标志
-        if(j == 0 || s[i] == s[j]){
-            ++i;
-            ++j;
+
+    //s[0]=length
+
+    while(i < len)
+    {
+        if(j == 0 || s[i] == s[j])
+        {
+            i++;
+            j++;
             next[i] = j;
         }
-        else j = next[j];
+        else 
+           j = next[j];
     }
-    //标准的求next数组方法
 }
-void myStr::kmp_nextVal(){
+
+
+
+void myStr::printNext()
+{
+    for(int i = 1; i <= len; i++) 
+       cout<<next[i];
+    cout << endl;
+}
+
+
+
+
+void myStr::kmp_nextVal()
+{
     int i, j;
-    nextval = new int[len + 1];//动态分配内存
+    nextval = new int[len + 1];
     i = 1;
     j = 0;
     nextval[1] = 0;
-    while(i < s[0]){
+    while(i < len)
+    {
         if(j == 0 || s[i] == s[j]){
-            ++i;
-            ++j;
-            if(s[i] != s[j]) nextval[i] = j;
-            else nextval[i] = nextval[j];
+            i++;
+            j++;
+
+            if(s[i] != s[j])
+               nextval[i] = j;
+            else 
+               nextval[i] = nextval[j];
             //此处为与求next数组不同之处，主要是即使回溯更新
         }
         else j = nextval[j];
     }
 }
-void myStr::printNext(){
-    for(int i = 1; i <= len; i++) cout<<next[i];//普通的输出
+
+
+void myStr::printNextVal()
+{
+    for(int i = 1; i <= len; i++) 
+       cout<<nextval[i];
     cout << endl;
 }
-void myStr::printNextVal(){
-    for(int i = 1; i <= len; i++) cout<<nextval[i];//普通的输出
-    cout << endl;
-}
+
+
 int kmpMatch(const myStr& S, const myStr& T){
     int i = 1;
     int j = 1;
