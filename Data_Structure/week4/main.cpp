@@ -39,4 +39,19 @@ cout<<isFind<<endl;//7
 
 system("pause");
 
+int i[]={2,3,10,2,4,30,4,4,25};
+myMatrix M(5,6,3,i);
+M.printMatrix();//5,6,3
+                //2,3,10
+                //2,4,30
+                //4,4,25
+myMatrix R;
+M.FastTransposeSMatrix(R);
+R.printMatrix();//6,5,3
+                //3,2,10
+                //4,2,30
+                //4,4,25
+
+system("pause");
+
 }

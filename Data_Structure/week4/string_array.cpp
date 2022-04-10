@@ -195,7 +195,8 @@ bool replaceStr(myStr& S, const int& start, const myStr& T, const myStr& V){
 
     if(T.len == V.len)
     {
-        for(int i = 1; i <= V.len; i++){
+        for(int i = 1; i <= V.len; i++)
+        {
             S.s[tmp] = V.s[i];
             tmp++;
         }
@@ -205,46 +206,69 @@ bool replaceStr(myStr& S, const int& start, const myStr& T, const myStr& V){
 }
 
 
-int simpleMatch(const myStr& S, const myStr& T){
-    int campared(0);//标志量
-    int ans(1);
-    int i(1);
-    for(int j = 1; j <= T.len; j++){
-        if(S.s[i] == T.s[j]){
+int simpleMatch(const myStr& S, const myStr& T)
+{
+    int campared=0;
+    int loc=1;
+    int i=1;
+
+    for(int j = 1; j <= T.len; j++)
+    {
+        if(S.s[i] == T.s[j])
+        {
             i++;
             campared++;
-        }//相同时标志量增加
-        else if(S.s[i] != T.s[j]){
-            ans++;
-            i = ans;
+            if(loc > S.len) break;
+            continue;
+        }
+
+        if(S.s[i] != T.s[j])
+        {
+            loc++;
+            i = loc;
             j = 0;
             campared = 0;
-        }//不同时从下一个重新开始循环
-        if(ans > S.len) break;
+            if(loc > S.len) break;
+            continue;
+        }
+        
     }
-    if(campared != T.len) return -1;
-    return ans;
+
+    if(campared != T.len) 
+       return -1;
+
+    return loc;
 }
-myMatrix::myMatrix(const int& rNum, const int& cNum, const int& nNum, const int* p): rn(rNum), cn(cNum), num(nNum) {
+myMatrix::myMatrix(const int& rNum, const int& cNum, const int& nNum, const int* p)
+{
+    rn=rNum;
+    cn=cNum;
+    num=nNum;
     matrix[0][0] = rn;
     matrix[0][1] = cn;
     matrix[0][2] = num;
     //表头分别存储稀疏矩阵的三个信息
     int j = 1;
-    for(int i = 0; i < 3*num; i++){
+
+    for(int i = 0; i < 3*num; i++)
+    {
         if((i + 1) % 3 == 1) matrix[j][0] = p[i];
-        else if((i + 1) % 3 == 2) matrix[j][1] = p[i];
-        else if((i + 1) % 3 == 0) matrix[j][2] = p[i];
+        if((i + 1) % 3 == 2) matrix[j][1] = p[i];
+        if((i + 1) % 3 == 0) matrix[j][2] = p[i];
         //根据输入数据的规律用对三取模来将不同列数据分开
         j = (i + 1) / 3 + 1;
     }
 }
-myMatrix::myMatrix(){
+
+myMatrix::myMatrix()
+{
     matrix[0][0] = 0;
     matrix[0][1] = 0;
     matrix[0][2] = 0;//初始化为0
 }
-myMatrix::~myMatrix(){
+
+myMatrix::~myMatrix()
+{
 
 }
 void myMatrix::printMatrix(){
