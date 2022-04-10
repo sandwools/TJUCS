@@ -1,15 +1,17 @@
 #include "string_array.h"
 #include <iostream>
 using namespace std;
-myStr::myStr(const char* p){
-    int ans(0);
-    int i;
+myStr::myStr(const char* p)
+{
+    int ans=0;
+    int i=1;
     while(p[ans] != '\0') ans++;
     len = ans;//真正意义的字符串长度
     s = new char[100000];//动态分配内存
     s[0] = len;//第一个元素存储长度
-    for(i = 1; i < len + 2; i++) s[i] = p[i - 1];//将数组元素导入字符串
+    for(; i < len + 2; i++) s[i] = p[i - 1];//将数组元素导入字符串
 }
+
 myStr::~myStr(){
 
 }
