@@ -8,7 +8,7 @@ myStr::myStr(const char* p)
     while(p[len] != '\0') 
        {len++;}
 
-    s = new char[100000];//s-> loc char
+    s = new char[len+2];//s-> loc char
     s[0] = len;//loc length
 
     for(int i=1 ; i < len + 2; i++) 
@@ -19,7 +19,7 @@ myStr::myStr(const char* p)
 
 myStr::~myStr()
 {
-    delete s;
+   // delete 作用域
 }
 
 
@@ -104,84 +104,125 @@ void myStr::printNextVal()
 int kmpMatch(const myStr& S, const myStr& T){
     int i = 1;
     int j = 1;
-    while(i <= S.s[0] && j <= T.s[0]){
-        if(j == 0 || S.s[i] == T.s[j]){
-            ++i;
-            ++j;
+    while(i <= S.s[0] && j <= T.s[0])
+    {
+        if(j == 0 || S.s[i] == T.s[j])
+        {
+            i++;
+            j++;
         }
         else j = S.nextval[j];//应用初始化好的nextval数组
     }
-    if(j > T.s[0]) return i - T.s[0];
+
+    if(j > T.s[0])
+       return i - T.s[0];
+
     return -1;
-    //标准的找到相同字符串位置的算法
 }
 bool replaceStr(myStr& S, const int& start, const myStr& T, const myStr& V){
-   int flag(0);//标志量
-    int a(start);
-    int m(1);
-    for(int n = 1; n <= T.len; n++){
-        if(S.s[m] == T.s[n]){
+    
+    int campared=0;
+    int ptr=start;
+    int m=1;
+
+
+    for(int n = 1; n <= T.len; n++)
+    {
+        if(S.s[m] == T.s[n])
+        {
             m++;
-            flag++;
-        }//相同时标志量增加
-        else if(S.s[m] != T.s[n]){
-            a++;
-            m = a;
+            campared++;
+            if(ptr > S.len)
+               break;
+            continue;
+        }
+
+        if(S.s[m] != T.s[n])
+        {
+            ptr++;
+            m = ptr;
             n = 0;
-            flag = 0;
-        }//不同时从下一个重新开始循环
-        if(a > S.len) break;
+            campared = 0;
+            if(ptr > S.len) 
+               break;
+            continue;
+        }
     }
-    if(flag != T.len) return 0;
-    //以上操作为找到相同部分的位置
-    int ans = a;
-    int l;
+
+    if(campared != T.len) 
+       return 0;
+
+
+    int ans = ptr;
+    int deltaLenth;
     int tmp = ans;
-    if(T.len < V.len){
-        l = V.len - T.len;
-        for(int i = S.len + 1; i >= ans + T.len; i--) S.s[i + l] = S.s[i];
+
+    if(T.len < V.len)
+    {
+        deltaLenth = V.len - T.len;
+
+        for(int i = S.len + 1; i >= ans + T.len; i--) 
+        {
+           S.s[i + deltaLenth] = S.s[i];
+        }
+
+        for(int i = 1; i <= V.len; i++)
+        {
+            S.s[tmp] = V.s[i];
+            tmp++;
+        }
+
+        S.len = S.len + deltaLenth;
+    }
+
+    if(T.len > V.len)
+    {
+        deltaLenth = T.len - V.len;
+
+        for(int i = 1; i <= V.len; i++)
+        {
+            S.s[tmp] = V.s[i];
+            tmp++;
+        }
+
+        for(int i = ans + T.len; i <= S.len + 1; i++)
+        {
+               S.s[i - deltaLenth] = S.s[i];
+        }
+
+        S.len = S.len - deltaLenth;
+    }
+
+    if(T.len == V.len)
+    {
         for(int i = 1; i <= V.len; i++){
             S.s[tmp] = V.s[i];
             tmp++;
         }
-        S.len = S.len + l;
-    }//替换串长则从后向前替换
-    else if(T.len > V.len){
-        l = T.len - V.len;
-        for(int i = 1; i <= V.len; i++){
-            S.s[tmp] = V.s[i];
-            tmp++;
-        }
-        for(int i = ans + T.len; i <= S.len + 1; i++) S.s[i - l] = S.s[i];
-        S.len = S.len - l;
-    }//替换串短则从前向后替换
-    else{
-        for(int i = 1; i <= V.len; i++){
-            S.s[tmp] = V.s[i];
-            tmp++;
-        }
-    }//同长则正常替换
+    }
+
     return 1;
-    //此处为替换字符串部分
 }
+
+
 int simpleMatch(const myStr& S, const myStr& T){
-    int flag(0);//标志量
+    int campared(0);//标志量
     int ans(1);
     int i(1);
     for(int j = 1; j <= T.len; j++){
         if(S.s[i] == T.s[j]){
             i++;
-            flag++;
+            campared++;
         }//相同时标志量增加
         else if(S.s[i] != T.s[j]){
             ans++;
             i = ans;
             j = 0;
-            flag = 0;
+            campared = 0;
         }//不同时从下一个重新开始循环
         if(ans > S.len) break;
     }
-    if(flag != T.len) return -1;
+    if(campared != T.len) return -1;
     return ans;
 }
 myMatrix::myMatrix(const int& rNum, const int& cNum, const int& nNum, const int* p): rn(rNum), cn(cNum), num(nNum) {
