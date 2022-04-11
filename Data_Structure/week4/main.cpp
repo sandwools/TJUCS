@@ -18,7 +18,7 @@ S.print();//hello future!
 isFind=replaceStr(S,1,T1, T2);
 cout<<isFind<<endl;//0
 
-myStr matchS("aabaabaabaac");
+myStr matchS("abaabaabaac");
 myStr matchT("aabaac");
 
 isFind=simpleMatch(matchS,matchT);
@@ -39,9 +39,9 @@ cout<<isFind<<endl;//7
 
 system("pause");
 
-int i[]={1,3,2, 3,1,2, 4,5,10, 5,5,20, 8,9,0 };
-//int i[]={1,1,0, 3,2,4,  8,2,10, };
-myMatrix M(10,10,5,i);
+//int i[]={1,3,2, 3,1,2, 4,5,10, 5,5,20, 8,9,0 };
+int i[]={1,1,0, 3,2,4,  8,2,10, };
+myMatrix M(10,10,3,i);
 //M.printMatrix();
 myMatrix R;
 M.FastTransposeSMatrix(R);

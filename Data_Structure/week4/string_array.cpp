@@ -109,10 +109,10 @@ int kmpMatch(const myStr& S, const myStr& T){
     {
         if(j == 0 || S.s[i] == T.s[j])
         {
-            i++;
-            j++;
+            ++i;
+            ++j;
         }
-        else j = S.nextval[j];//应用初始化好的nextval数组
+        else j = S.next[j];
     }
 
     if(j > T.s[0])
