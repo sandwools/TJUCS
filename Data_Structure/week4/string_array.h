@@ -1,4 +1,5 @@
 #include <iostream>
+#include<algorithm>
 using namespace std;
 #ifndef STRING_LIST
 #define STRING_LIST

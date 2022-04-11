@@ -1,5 +1,6 @@
 #include "string_array.h"
 #include <iostream>
+#include<algorithm>
 using namespace std;
 myStr::myStr(const char* p)
 {
@@ -280,6 +281,7 @@ myMatrix::~myMatrix()
 
 void myMatrix::printMatrix()
 {
+    //sort(matrix,matrix+num);
     for(int i = 0; i <= num; i++)
        {cout<<matrix[i][0]<<","<<matrix[i][1]<<","<<matrix[i][2]<<endl;}
     //    for(int j = 0; j < 3; j++)
@@ -320,9 +322,24 @@ void myMatrix::FastTransposeSMatrix(myMatrix& T)
            T.matrix[i][j] = Mid.matrix[i][j];
        }
 
-    Mid.~myMatrix();
-
     T.rn = $rn;
     T.cn = $cn;
     T.num = num;
+
+    //记得重新排序
+
+    for(int i=0;i<=num;i++)
+    {
+        for(int j=0;j<=num;j++)
+        {
+            if(Mid.matrix[j][1]=i)
+            {
+                Mid.matrix[j][0]=T.matrix[i][0];
+                Mid.matrix[j][1]=T.matrix[i][1];
+                Mid.matrix[j][2]=T.matrix[i][2];
+            }
+        }
+    }
+
+
 }
