@@ -1,5 +1,7 @@
 #include"myTree.cpp"
-
+using namespace std;
+int main()
+{
 MyTree myTree("ABC@@DE@G@@F@@@");
 myTree.preOrderTraverse();//ABCDEGF
 cout<<endl;
@@ -32,3 +34,5 @@ hTree.printHuffmanCodes();
 4:111
 2:110
 */
+system("pause");
+}
