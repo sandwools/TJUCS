@@ -41,8 +41,8 @@ MyTree::MyTree()
 	TreeNode *left=new TreeNode;
 	TreeNode *right=new TreeNode;
 
-	left->data='@';
-	right->data='@';
+	// left->data='@';
+	// right->data='@';
 	
 	root->leftChild=left;
 	root->rightChild=right;
@@ -56,6 +56,7 @@ MyTree::MyTree(const char *a)
 		node[j]=a[j];
 		j++;
 	}
+	//暂存
 	flag=0;
 
 	root=new TreeNode;
@@ -66,8 +67,9 @@ MyTree::MyTree(const char *a)
 	root->leftChild=left;
 	root->rightChild=right;
 
-	left->data='@';//空
-	right->data='@';//空
+	// left->data='@';//空
+	// right->data='@';//空
+
 	root->data=a[0];//根节点赋初值
 
 	int i=1;
@@ -76,37 +78,53 @@ MyTree::MyTree(const char *a)
 	p=root;
 
 	NodeNum=1;
-	while(a[i]!='\0'){
-		while((p->leftChild->data!='@'&&p->rightChild->data!='@')||(p->leftChild->tag==1&&p->rightChild->tag==1)||(p->rightChild->data!='@')){
+	while(a[i]!='\0')
+	{
+		while
+		(
+		 (p->leftChild->data!='@'&&p->rightChild->data!='@')||
+		 (p->leftChild->tag==1&&p->rightChild->tag==1)||
+		 (p->rightChild->data!='@')
+		)
+		{
 			p=p->father;//回溯
 		}
-		if(a[i]!='@'){
-			if(p->leftChild->data=='@'&&p->leftChild->tag!=1){//结点插入左子树
+
+		if(a[i]!='@')
+		{
+			if(p->leftChild->data=='@'&&p->leftChild->tag!=1)
+			{
+				//结点插入左子树
 			    TreeNode *q=new TreeNode;
 			    q->data=a[i];
 				q->tag=0;
     			p->leftChild=q;
+
 	    		TreeNode *left=new TreeNode;
 		    	TreeNode *right=new TreeNode;
-    			left->data='@';
-	    		right->data='@';
-		    	q->father=p;
+    			// left->data='@';
+	    		// right->data='@';
+		    	
+				q->father=p;
     			q->leftChild=left;
 	    		q->rightChild=right;
+
 		    	p=q;
 			    i++;
     			NodeNum++;
 	    		continue;
 		    }
-    		if(p->rightChild->data=='@'&&p->rightChild->tag!=1){//结点插入右子树
+    		if(p->rightChild->data=='@'&&p->rightChild->tag!=1)
+			{
+				//结点插入右子树
 	    		TreeNode *q=new TreeNode;
 		    	q->data=a[i];
 				q->tag=0;
 			    p->rightChild=q;
     			TreeNode *left=new TreeNode;
 	    		TreeNode *right=new TreeNode;
-		    	left->data='@';
-			    right->data='@';
+		    	// left->data='@';
+			    // right->data='@';
     			q->father=p;
 	    		q->leftChild=left;
 		    	q->rightChild=right;
@@ -116,12 +134,16 @@ MyTree::MyTree(const char *a)
 		    	continue;
 		    }
 		}
-		if(p->leftChild->tag==0&&p->leftChild->data=='@'){//左子树记为空
+
+		if(p->leftChild->tag==0&&p->leftChild->data=='@')
+		{//左子树记为空
 			p->leftChild->tag=1;
 			i++;
 			continue;
 		}
-		else{//右子树记为空
+		else
+		{
+			//右子树记为空
 			p->rightChild->tag=1;
 			i++;
 			continue;
@@ -135,8 +157,8 @@ MyTree::MyTree(const MyTree &T){
 	TreeNode *right=new TreeNode;
 	root->leftChild=left;
 	root->rightChild=right;
-	left->data='@';//空
-	right->data='@';//空
+	// left->data='@';//空
+	// right->data='@';//空
 	root->data=T.node[0];//根节点赋初值
 	int i=1;
 	TreeNode *p=new TreeNode;
@@ -154,8 +176,8 @@ MyTree::MyTree(const MyTree &T){
     			p->leftChild=q;
 	    		TreeNode *left=new TreeNode;
 		    	TreeNode *right=new TreeNode;
-    			left->data='@';
-	    		right->data='@';
+    			// left->data='@';
+	    		// right->data='@';
 		    	q->father=p;
     			q->leftChild=left;
 	    		q->rightChild=right;
@@ -171,8 +193,8 @@ MyTree::MyTree(const MyTree &T){
 			    p->rightChild=q;
     			TreeNode *left=new TreeNode;
 	    		TreeNode *right=new TreeNode;
-		    	left->data='@';
-			    right->data='@';
+		    	// left->data='@';
+			    // right->data='@';
     			q->father=p;
 	    		q->leftChild=left;
 		    	q->rightChild=right;

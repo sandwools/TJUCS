@@ -2,6 +2,7 @@
 #include<stack>
 #include<algorithm>
 #include<string.h>
+
 using namespace std;
 
 typedef 
@@ -32,6 +33,9 @@ public:
 
 	int tag=0;//是否为空
     int code;
+
+	NodeTag lTag, rTag; 
+
 	void printNode();
 };
 
@@ -41,21 +45,27 @@ class MyTree
 {
 public:
     TreeNode *root;//根节点
-    int flag;//是否为线索二叉树
+    bool flag;//是否为线索二叉树
     int NodeNum;//结点个数
 	char node[100];//记录元素数组
+
     MyTree();
     MyTree(const char *a);
     MyTree(const MyTree &T);
+	//~MyTree();
+
     void preOrderTraverse();
     void inOrderTraverse();
-	void post(int ileft1,int iright1,int ileft2,int iright2);
     void postOrderTraverse();
+	void post(int ileft1,int iright1,int ileft2,int iright2);
+
     int countLeaf();
-	int height(const TreeNode *root);
     int countHeight();
+	int height(const TreeNode *root);
+
     bool isThreadedTree();
     bool inOrderThreading();
+
     TreeNode& locateNode(const char& v);
     TreeNode& preNode(const TreeNode& n);
     TreeNode& nextNode(const TreeNode& n);
