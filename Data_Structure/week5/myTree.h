@@ -31,7 +31,7 @@ public:
     TreeNode(char, TreeNode*, TreeNode*, NodeTag, NodeTag);
     ~TreeNode();
 
-	int tag=0;//是否为空
+	int ifNull=0;//是否为空
     int code;
 
 	NodeTag lTag, rTag; 
@@ -51,10 +51,10 @@ public:
 
     MyTree();
     MyTree(const char *a);
-    MyTree(const MyTree &T);
+    MyTree(const MyTree &COPY);
 	//~MyTree();
 
-    void preOrderTraverse();
+    void preOrderTraverse();//前序遍历
     void inOrderTraverse();
     void postOrderTraverse();
 	void post(int ileft1,int iright1,int ileft2,int iright2);
@@ -73,15 +73,18 @@ public:
 class HuffmanTree
 {
 public:
-	struct HTNode{
-		int weight;
+	struct HTNode
+	{
+		int weight=-99;
 		int parent=-1;
 		int leftChild=-1;
 		int rightChild=-1;
 	};
+
 	HTNode *array;
-	int *w;
+	int *weight;
 	int NodeNum;
 	HuffmanTree(const int& n, const int *a);
+	//~HuffmanTree();
 	void printHuffmanCodes();
 };
