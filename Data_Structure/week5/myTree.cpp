@@ -1,4 +1,9 @@
+#ifndef _MYTREE_CPP_
+#define _MYTREE_CPP_
+
 #include"myTree.h"
+
+#endif
 using namespace std;
 
 NodeTag ss;

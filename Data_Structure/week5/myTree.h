@@ -1,8 +1,12 @@
+#ifndef _MYTREE_H_
+#define _MYTREE_H_
+
 #include<iostream>
 #include<stack>
 #include<algorithm>
 #include<string.h>
 
+#endif
 using namespace std;
 
 typedef 
@@ -88,3 +92,4 @@ public:
 	//~HuffmanTree();
 	void printHuffmanCodes();
 };
+
